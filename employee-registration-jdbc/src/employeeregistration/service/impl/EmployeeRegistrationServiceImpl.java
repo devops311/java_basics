@@ -22,7 +22,7 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 	DepartmentDao departmentDao = new DepartmentDaoImpl();
 	
 	@Override
-	public Employee register(Employee employee) throws NoSuchDepartmentException{
+	public Employee register(Employee employee) throws ServiceException{
 		int departmentId = 0;
 		try {
 			Department department = departmentDao.getDepartmentByName(employee.getDepartment().getDepartmentName());
@@ -35,7 +35,11 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 			
 		}
 		employee.getDepartment().setDepartmentId(departmentId);
-		return employeeDao.addEmployee(employee);
+		try {
+			return employeeDao.addEmployee(employee);
+		} catch (DaoException e) {
+			throw new ServiceException();
+		}
 	}
 
 }

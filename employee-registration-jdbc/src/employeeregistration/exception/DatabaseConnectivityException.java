@@ -1,6 +1,6 @@
 package employeeregistration.exception;
 
-public class NoSuchDepartmentException extends ServiceException {
+public class DatabaseConnectivityException extends Exception {
 
 	/**
 	 * 
@@ -10,7 +10,7 @@ public class NoSuchDepartmentException extends ServiceException {
 	/**
 	 * 
 	 */
-	public NoSuchDepartmentException() {
+	public DatabaseConnectivityException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -21,7 +21,7 @@ public class NoSuchDepartmentException extends ServiceException {
 	 * @param enableSuppression
 	 * @param writableStackTrace
 	 */
-	public NoSuchDepartmentException(String message, Throwable cause, boolean enableSuppression,
+	public DatabaseConnectivityException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
@@ -31,7 +31,7 @@ public class NoSuchDepartmentException extends ServiceException {
 	 * @param message
 	 * @param cause
 	 */
-	public NoSuchDepartmentException(String message, Throwable cause) {
+	public DatabaseConnectivityException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
@@ -39,7 +39,7 @@ public class NoSuchDepartmentException extends ServiceException {
 	/**
 	 * @param message
 	 */
-	public NoSuchDepartmentException(String message) {
+	public DatabaseConnectivityException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
@@ -47,13 +47,9 @@ public class NoSuchDepartmentException extends ServiceException {
 	/**
 	 * @param cause
 	 */
-	public NoSuchDepartmentException(Throwable cause) {
+	public DatabaseConnectivityException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
 
 }

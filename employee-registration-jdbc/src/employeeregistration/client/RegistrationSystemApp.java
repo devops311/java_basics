@@ -18,8 +18,8 @@ public class RegistrationSystemApp {
 	public static void main(String[] args) {
 		DepartmentService departmentService = new DepartmentServiceImpl();
 		EmployeeRegistrationService employeeRegistrationService = new EmployeeRegistrationServiceImpl();
-		// registerDepartment(departmentService);
-		//getAllDepartment(departmentService);
+		registerDepartment(departmentService);
+		getAllDepartment(departmentService);
 		registerEmployee(employeeRegistrationService);
 	}
 
@@ -28,12 +28,23 @@ public class RegistrationSystemApp {
 		System.out.println("Enter department name");
 		String departmentName = scanner.nextLine();
 		department.setDepartmentName(departmentName);
-		Department savedDepartment = departmentService.addDepartment(department);
+		Department savedDepartment = null;
+		try {
+			savedDepartment = departmentService.addDepartment(department);
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Department have been saved with ID " + savedDepartment.getDepartmentId());
 	}
 
 	private static void getAllDepartment(DepartmentService departmentService) {
-		System.out.println(departmentService.getAllDepartment());
+		try {
+			System.out.println(departmentService.getAllDepartment());
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private static void registerEmployee(EmployeeRegistrationService employeeRegistrationService) {
@@ -49,7 +60,7 @@ public class RegistrationSystemApp {
 		Employee savedEmployee = null;
 		try {
 			savedEmployee = employeeRegistrationService.register(employee);
-		} catch (NoSuchDepartmentException e) {
+		}  catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

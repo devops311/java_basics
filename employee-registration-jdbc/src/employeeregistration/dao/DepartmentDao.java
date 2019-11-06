@@ -7,9 +7,9 @@ import employeeregistration.exception.DaoException;
 
 public interface DepartmentDao {
 	
-	public Department addDepartment(Department department);
+	public Department addDepartment(Department department) throws DaoException;
 	
-	public Set<Department> getAllDepartment();
+	public Set<Department> getAllDepartment() throws DaoException;
 	
 	public Department getDepartmentByName(String departmentName) throws DaoException;
 
