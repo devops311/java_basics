@@ -1,6 +1,6 @@
 package employeeregistration.service;
 
-import java.util.List;
+import java.io.IOException;
 import java.util.Set;
 
 import employeeregistration.entity.Department;
@@ -10,8 +10,8 @@ public interface DepartmentService {
 	
 	public Department addDepartment(Department department) throws ServiceException;
 	
-	public Set<Department> getAllDepartment() throws ServiceException;
-	
-	public Department getDepartmentById(Department department);
+	public Set<Department> getAllDepartment() throws ServiceException, IOException;
+
+	public Department getDepartmentById(int departmentId) throws ServiceException;
 
 }

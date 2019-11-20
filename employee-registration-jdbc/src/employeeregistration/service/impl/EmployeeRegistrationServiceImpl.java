@@ -27,7 +27,7 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 		try {
 			Department department = departmentDao.getDepartmentByName(employee.getDepartment().getDepartmentName());
 			if(department == null) {
-				throw new NoSuchDepartmentException("");
+				throw new NoSuchDepartmentException("The department name entered is invalid");
 			}
 			departmentId = department.getDepartmentId();
 			
@@ -38,7 +38,7 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 		try {
 			return employeeDao.addEmployee(employee);
 		} catch (DaoException e) {
-			throw new ServiceException();
+			throw new ServiceException(e);
 		}
 	}
 

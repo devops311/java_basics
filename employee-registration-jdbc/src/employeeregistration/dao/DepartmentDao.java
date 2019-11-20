@@ -13,4 +13,5 @@ public interface DepartmentDao {
 	
 	public Department getDepartmentByName(String departmentName) throws DaoException;
 
+	public Department getDepartmentById(int departmentId) throws DaoException;
 }

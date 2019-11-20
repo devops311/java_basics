@@ -31,7 +31,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 				department.setDepartmentId(generatedDepartmentId);
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e);
+			throw new DaoException("There is some error in SQL", e);
 		} catch (DatabaseConnectivityException e1) {
 			throw new DaoException(ErrorMessageConstants.CONNECTION_UNAVAILABLE, e1);
 		}
@@ -79,10 +79,35 @@ public class DepartmentDaoImpl implements DepartmentDao {
 				}
 			}
 		} catch (SQLException e) {
-			throw new DaoException(ErrorMessageConstants.QUERY_ERROR,e);
+			throw new DaoException(ErrorMessageConstants.QUERY_ERROR, e);
 		} catch (DatabaseConnectivityException e1) {
-			throw new DaoException(ErrorMessageConstants.CONNECTION_UNAVAILABLE,e1);
+			throw new DaoException(ErrorMessageConstants.CONNECTION_UNAVAILABLE, e1);
 		}
 		return department;
 	}
+
+	@Override
+	public Department getDepartmentById(int departmentId) throws DaoException {
+		Department department = new Department();
+		Connection conn;
+		try {
+			conn = ConnectionUtil.getConnection();
+			String query = "selet * from department where departmentId = ?";
+			try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+				preparedStatement.setInt(1, departmentId);
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+					while (resultSet.next()) {
+						department.setDepartmentId(resultSet.getInt("departmentId"));
+						department.setDepartmentName(resultSet.getString("departmentName"));
+					}
+				}
+			}
+		} catch (DatabaseConnectivityException e) {
+			throw new DaoException("There is some exception in DB connection", e);
+		} catch (SQLException e) {
+			throw new DaoException("There is some exception in SQL Query", e);
+		}
+		return department;
+	}
+
 }
